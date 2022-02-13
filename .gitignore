@@ -1,0 +1,16 @@
+#La idea es dejar solo los .c, .asm, .mcppi para mikroC y el .hex para 
+#utilizar solo mikroProg si fuese el caso
+
+Semana-1/*.txt
+Semana-1/*.bmk
+Semana-1/*.brk
+Semana-1/*.cfg
+Semana-1/*.cp
+Semana-1/*.dbg
+Semana-1/*.dct
+Semana-1/*.dlt
+Semana-1/*.log
+Semana-1/*.mcl
+
+
+
