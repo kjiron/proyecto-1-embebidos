@@ -15,4 +15,4 @@
 
 ### Configuración del cristal
 Esto es importante para tener la velocidad adecuada en la GLCD y ver reflejados los delays.
-[![Config del Cristal][cristal-screenshot]](https://github.com/kjiron/proyecto-1-embebidos/blob/main/configPIC/cristal.PNG)
+[!cristal](https://github.com/kjiron/proyecto-1-embebidos/blob/main/configPIC/cristal.PNG)
