@@ -10,3 +10,8 @@
 - [x] Pruebas iniciales con pantalla GLCD.
 - [x] Pintar un pixel y moverlo según entradas.
 
+### DBG
+- [x] Maquina de estado con el inicio del juego y su menu.
+
+### Configuración del cristal
+

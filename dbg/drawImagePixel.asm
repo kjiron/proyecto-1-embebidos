@@ -103,7 +103,7 @@ L_main11:
 	GOTO        L_main7
 ;drawImagePixel.c,101 :: 		}
 L_main10:
-;drawImagePixel.c,114 :: 		if ((modeGame == 0) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
+;drawImagePixel.c,103 :: 		if ((modeGame == 0) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
 	MOVLW       0
 	XORWF       main_modeGame_L0+1, 0 
 	BTFSS       STATUS+0, 2 
@@ -120,10 +120,10 @@ L__main51:
 	GOTO        L_main16
 L__main47:
 L__main46:
-;drawImagePixel.c,116 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,105 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,117 :: 		Delay_ms(20);
+;drawImagePixel.c,106 :: 		Delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
@@ -135,7 +135,7 @@ L_main17:
 	BRA         L_main17
 	NOP
 	NOP
-;drawImagePixel.c,118 :: 		Glcd_Image(seleccionDeJuego);
+;drawImagePixel.c,107 :: 		Glcd_Image(seleccionDeJuego);
 	MOVLW       _seleccionDeJuego+0
 	MOVWF       FARG_Glcd_Image_image+0 
 	MOVLW       hi_addr(_seleccionDeJuego+0)
@@ -143,7 +143,7 @@ L_main17:
 	MOVLW       higher_addr(_seleccionDeJuego+0)
 	MOVWF       FARG_Glcd_Image_image+2 
 	CALL        _Glcd_Image+0, 0
-;drawImagePixel.c,119 :: 		Glcd_Circle(25, 48, 4, 1);
+;drawImagePixel.c,108 :: 		Glcd_Circle(25, 48, 4, 1);
 	MOVLW       25
 	MOVWF       FARG_Glcd_Circle_x_center+0 
 	MOVLW       0
@@ -159,7 +159,7 @@ L_main17:
 	MOVLW       1
 	MOVWF       FARG_Glcd_Circle_color+0 
 	CALL        _Glcd_Circle+0, 0
-;drawImagePixel.c,120 :: 		Delay_ms(1000);
+;drawImagePixel.c,109 :: 		Delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -175,14 +175,14 @@ L_main18:
 	BRA         L_main18
 	NOP
 	NOP
-;drawImagePixel.c,121 :: 		modeGame = 1;
+;drawImagePixel.c,110 :: 		modeGame = 1;
 	MOVLW       1
 	MOVWF       main_modeGame_L0+0 
 	MOVLW       0
 	MOVWF       main_modeGame_L0+1 
-;drawImagePixel.c,122 :: 		}
+;drawImagePixel.c,111 :: 		}
 L_main16:
-;drawImagePixel.c,125 :: 		if ((PORTA.B4 == 1) && (modeGame == 1))
+;drawImagePixel.c,114 :: 		if ((PORTA.B4 == 1) && (modeGame == 1))
 	BTFSS       PORTA+0, 4 
 	GOTO        L_main21
 	MOVLW       0
@@ -195,7 +195,7 @@ L__main52:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_main21
 L__main45:
-;drawImagePixel.c,127 :: 		Delay_ms(20);
+;drawImagePixel.c,116 :: 		Delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
@@ -207,16 +207,16 @@ L_main22:
 	BRA         L_main22
 	NOP
 	NOP
-;drawImagePixel.c,128 :: 		state = 3;
+;drawImagePixel.c,117 :: 		state = 3;
 	MOVLW       3
 	MOVWF       main_state_L0+0 
 	MOVLW       0
 	MOVWF       main_state_L0+1 
-;drawImagePixel.c,129 :: 		break;
+;drawImagePixel.c,118 :: 		break;
 	GOTO        L_main7
-;drawImagePixel.c,130 :: 		}
+;drawImagePixel.c,119 :: 		}
 L_main21:
-;drawImagePixel.c,142 :: 		if ((modeGame == 1) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
+;drawImagePixel.c,121 :: 		if ((modeGame == 1) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
 	MOVLW       0
 	XORWF       main_modeGame_L0+1, 0 
 	BTFSS       STATUS+0, 2 
@@ -233,10 +233,10 @@ L__main53:
 	GOTO        L_main27
 L__main44:
 L__main43:
-;drawImagePixel.c,144 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,123 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,145 :: 		Delay_ms(20);
+;drawImagePixel.c,124 :: 		Delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
@@ -248,7 +248,7 @@ L_main28:
 	BRA         L_main28
 	NOP
 	NOP
-;drawImagePixel.c,146 :: 		Glcd_Image(seleccionDeJuego);
+;drawImagePixel.c,125 :: 		Glcd_Image(seleccionDeJuego);
 	MOVLW       _seleccionDeJuego+0
 	MOVWF       FARG_Glcd_Image_image+0 
 	MOVLW       hi_addr(_seleccionDeJuego+0)
@@ -256,7 +256,7 @@ L_main28:
 	MOVLW       higher_addr(_seleccionDeJuego+0)
 	MOVWF       FARG_Glcd_Image_image+2 
 	CALL        _Glcd_Image+0, 0
-;drawImagePixel.c,147 :: 		Glcd_Circle(25, 35, 4, 1);
+;drawImagePixel.c,126 :: 		Glcd_Circle(25, 35, 4, 1);
 	MOVLW       25
 	MOVWF       FARG_Glcd_Circle_x_center+0 
 	MOVLW       0
@@ -272,7 +272,7 @@ L_main28:
 	MOVLW       1
 	MOVWF       FARG_Glcd_Circle_color+0 
 	CALL        _Glcd_Circle+0, 0
-;drawImagePixel.c,148 :: 		Delay_ms(1000);
+;drawImagePixel.c,127 :: 		Delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -288,15 +288,15 @@ L_main29:
 	BRA         L_main29
 	NOP
 	NOP
-;drawImagePixel.c,149 :: 		modeGame = 0;
+;drawImagePixel.c,128 :: 		modeGame = 0;
 	CLRF        main_modeGame_L0+0 
 	CLRF        main_modeGame_L0+1 
-;drawImagePixel.c,150 :: 		}
+;drawImagePixel.c,129 :: 		}
 L_main27:
-;drawImagePixel.c,153 :: 		}
+;drawImagePixel.c,132 :: 		}
 	GOTO        L_main6
 L_main7:
-;drawImagePixel.c,154 :: 		Delay_ms(1000);
+;drawImagePixel.c,133 :: 		Delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -312,14 +312,14 @@ L_main30:
 	BRA         L_main30
 	NOP
 	NOP
-;drawImagePixel.c,155 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,134 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,156 :: 		break;
+;drawImagePixel.c,135 :: 		break;
 	GOTO        L_main3
-;drawImagePixel.c,160 :: 		case 2:
+;drawImagePixel.c,139 :: 		case 2:
 L_main31:
-;drawImagePixel.c,163 :: 		Glcd_Dot(posX, posY, 2);
+;drawImagePixel.c,142 :: 		Glcd_Dot(posX, posY, 2);
 	MOVF        main_posX_L0+0, 0 
 	MOVWF       FARG_Glcd_Dot_x_pos+0 
 	MOVF        main_posY_L0+0, 0 
@@ -327,7 +327,7 @@ L_main31:
 	MOVLW       2
 	MOVWF       FARG_Glcd_Dot_color+0 
 	CALL        _Glcd_Dot+0, 0
-;drawImagePixel.c,164 :: 		Delay_ms(10);
+;drawImagePixel.c,143 :: 		Delay_ms(10);
 	MOVLW       26
 	MOVWF       R12, 0
 	MOVLW       248
@@ -338,13 +338,13 @@ L_main32:
 	DECFSZ      R12, 1, 1
 	BRA         L_main32
 	NOP
-;drawImagePixel.c,167 :: 		if (PORTA.B0 == 1)
+;drawImagePixel.c,146 :: 		if (PORTA.B0 == 1)
 	BTFSS       PORTA+0, 0 
 	GOTO        L_main33
-;drawImagePixel.c,169 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,148 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,170 :: 		Delay_ms(5);
+;drawImagePixel.c,149 :: 		Delay_ms(5);
 	MOVLW       13
 	MOVWF       R12, 0
 	MOVLW       251
@@ -356,18 +356,18 @@ L_main34:
 	BRA         L_main34
 	NOP
 	NOP
-;drawImagePixel.c,171 :: 		posX = posX + 1;
+;drawImagePixel.c,150 :: 		posX = posX + 1;
 	INFSNZ      main_posX_L0+0, 1 
 	INCF        main_posX_L0+1, 1 
-;drawImagePixel.c,172 :: 		}
+;drawImagePixel.c,151 :: 		}
 L_main33:
-;drawImagePixel.c,174 :: 		if (PORTA.B1 == 1)
+;drawImagePixel.c,153 :: 		if (PORTA.B1 == 1)
 	BTFSS       PORTA+0, 1 
 	GOTO        L_main35
-;drawImagePixel.c,176 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,155 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,177 :: 		Delay_ms(5);
+;drawImagePixel.c,156 :: 		Delay_ms(5);
 	MOVLW       13
 	MOVWF       R12, 0
 	MOVLW       251
@@ -379,20 +379,20 @@ L_main36:
 	BRA         L_main36
 	NOP
 	NOP
-;drawImagePixel.c,178 :: 		posX = posX - 1;
+;drawImagePixel.c,157 :: 		posX = posX - 1;
 	MOVLW       1
 	SUBWF       main_posX_L0+0, 1 
 	MOVLW       0
 	SUBWFB      main_posX_L0+1, 1 
-;drawImagePixel.c,179 :: 		}
+;drawImagePixel.c,158 :: 		}
 L_main35:
-;drawImagePixel.c,182 :: 		if (PORTA.B2 == 1)
+;drawImagePixel.c,161 :: 		if (PORTA.B2 == 1)
 	BTFSS       PORTA+0, 2 
 	GOTO        L_main37
-;drawImagePixel.c,184 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,163 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,185 :: 		Delay_ms(5);
+;drawImagePixel.c,164 :: 		Delay_ms(5);
 	MOVLW       13
 	MOVWF       R12, 0
 	MOVLW       251
@@ -404,18 +404,18 @@ L_main38:
 	BRA         L_main38
 	NOP
 	NOP
-;drawImagePixel.c,186 :: 		posY = posY + 1;
+;drawImagePixel.c,165 :: 		posY = posY + 1;
 	INFSNZ      main_posY_L0+0, 1 
 	INCF        main_posY_L0+1, 1 
-;drawImagePixel.c,187 :: 		}
+;drawImagePixel.c,166 :: 		}
 L_main37:
-;drawImagePixel.c,189 :: 		if (PORTA.B3 == 1)
+;drawImagePixel.c,168 :: 		if (PORTA.B3 == 1)
 	BTFSS       PORTA+0, 3 
 	GOTO        L_main39
-;drawImagePixel.c,191 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,170 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,192 :: 		Delay_ms(5);
+;drawImagePixel.c,171 :: 		Delay_ms(5);
 	MOVLW       13
 	MOVWF       R12, 0
 	MOVLW       251
@@ -427,20 +427,20 @@ L_main40:
 	BRA         L_main40
 	NOP
 	NOP
-;drawImagePixel.c,193 :: 		posY = posY - 1;
+;drawImagePixel.c,172 :: 		posY = posY - 1;
 	MOVLW       1
 	SUBWF       main_posY_L0+0, 1 
 	MOVLW       0
 	SUBWFB      main_posY_L0+1, 1 
-;drawImagePixel.c,194 :: 		}
+;drawImagePixel.c,173 :: 		}
 L_main39:
-;drawImagePixel.c,195 :: 		break;
+;drawImagePixel.c,174 :: 		break;
 	GOTO        L_main3
-;drawImagePixel.c,197 :: 		default:
+;drawImagePixel.c,176 :: 		default:
 L_main41:
-;drawImagePixel.c,198 :: 		break;
+;drawImagePixel.c,177 :: 		break;
 	GOTO        L_main3
-;drawImagePixel.c,199 :: 		}
+;drawImagePixel.c,178 :: 		}
 L_main2:
 	MOVLW       0
 	XORWF       main_state_L0+1, 0 
@@ -471,17 +471,17 @@ L__main56:
 	GOTO        L_main31
 	GOTO        L_main41
 L_main3:
-;drawImagePixel.c,201 :: 		}
+;drawImagePixel.c,180 :: 		}
 	GOTO        L_main0
-;drawImagePixel.c,204 :: 		}
+;drawImagePixel.c,183 :: 		}
 L_end_main:
 	GOTO        $+0
 ; end of _main
 
 _primerFrame:
 
-;drawImagePixel.c,206 :: 		void primerFrame(void){
-;drawImagePixel.c,207 :: 		Glcd_Image(pantallaDeInicio);
+;drawImagePixel.c,185 :: 		void primerFrame(void){
+;drawImagePixel.c,186 :: 		Glcd_Image(pantallaDeInicio);
 	MOVLW       _pantallaDeInicio+0
 	MOVWF       FARG_Glcd_Image_image+0 
 	MOVLW       hi_addr(_pantallaDeInicio+0)
@@ -489,7 +489,7 @@ _primerFrame:
 	MOVLW       higher_addr(_pantallaDeInicio+0)
 	MOVWF       FARG_Glcd_Image_image+2 
 	CALL        _Glcd_Image+0, 0
-;drawImagePixel.c,208 :: 		Delay_ms(2000);
+;drawImagePixel.c,187 :: 		Delay_ms(2000);
 	MOVLW       21
 	MOVWF       R11, 0
 	MOVLW       75
@@ -504,10 +504,10 @@ L_primerFrame42:
 	DECFSZ      R11, 1, 1
 	BRA         L_primerFrame42
 	NOP
-;drawImagePixel.c,209 :: 		Glcd_Fill(0x00);
+;drawImagePixel.c,188 :: 		Glcd_Fill(0x00);
 	CLRF        FARG_Glcd_Fill_pattern+0 
 	CALL        _Glcd_Fill+0, 0
-;drawImagePixel.c,211 :: 		}
+;drawImagePixel.c,190 :: 		}
 L_end_primerFrame:
 	RETURN      0
 ; end of _primerFrame

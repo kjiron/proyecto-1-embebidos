@@ -89,7 +89,7 @@ void main() {
  state = 2;
  break;
  }
-#line 114 "C:/Users/Usuario/Desktop/Isemestre2022/tallerEmbebidos/proyecto-1-embebidos/dbg/drawImagePixel.c"
+
  if ((modeGame == 0) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
  {
  Glcd_Fill(0x00);
@@ -107,7 +107,7 @@ void main() {
  state = 3;
  break;
  }
-#line 142 "C:/Users/Usuario/Desktop/Isemestre2022/tallerEmbebidos/proyecto-1-embebidos/dbg/drawImagePixel.c"
+
  if ((modeGame == 1) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
  {
  Glcd_Fill(0x00);
