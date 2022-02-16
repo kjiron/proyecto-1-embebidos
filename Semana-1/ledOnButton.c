@@ -1,3 +1,17 @@
+void leerPuertos(){
+    if(PORTB.B0 != 0)
+    {
+        LATD.B0 = 1;
+    }
+        
+    if(PORTB.B1 != 0)
+    {
+        LATD.B0 = 0;
+    }
+
+}
+
+
 void main(){
     /*
     enciende un led con un boton y lo apaga con otro
@@ -17,14 +31,6 @@ void main(){
 
     while(1)
     {
-        if(PORTB.B0 != 0)
-        {
-            LATD.B0 = 1;
-        }
-        
-        if(PORTB.B1 != 0)
-        {
-            LATD.B0 = 0;
-        }
+        leerPuertos();
     }
 }

@@ -1,5 +1,47 @@
 #line 1 "C:/Users/Usuario/Desktop/Isemestre2022/tallerEmbebidos/proyecto-1-embebidos/dbg/drawImagePixel.c"
-#line 13 "C:/Users/Usuario/Desktop/Isemestre2022/tallerEmbebidos/proyecto-1-embebidos/dbg/drawImagePixel.c"
+#line 1 "c:/users/public/documents/mikroelektronika/mikroc pro for pic/include/stdint.h"
+
+
+
+
+typedef signed char int8_t;
+typedef signed int int16_t;
+typedef signed long int int32_t;
+
+
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
+typedef unsigned long int uint32_t;
+
+
+typedef signed char int_least8_t;
+typedef signed int int_least16_t;
+typedef signed long int int_least32_t;
+
+
+typedef unsigned char uint_least8_t;
+typedef unsigned int uint_least16_t;
+typedef unsigned long int uint_least32_t;
+
+
+
+typedef signed char int_fast8_t;
+typedef signed int int_fast16_t;
+typedef signed long int int_fast32_t;
+
+
+typedef unsigned char uint_fast8_t;
+typedef unsigned int uint_fast16_t;
+typedef unsigned long int uint_fast32_t;
+
+
+typedef signed int intptr_t;
+typedef unsigned int uintptr_t;
+
+
+typedef signed long int intmax_t;
+typedef unsigned long int uintmax_t;
+#line 18 "C:/Users/Usuario/Desktop/Isemestre2022/tallerEmbebidos/proyecto-1-embebidos/dbg/drawImagePixel.c"
 const code char pantallaDeInicio[1024] = {
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 143, 143, 143, 143, 143, 143, 143, 143, 143, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 15, 15, 15, 15, 15, 15, 15, 255, 255, 255, 255, 0, 0, 0, 0, 0, 255, 255, 255, 255, 31, 255, 255, 240, 240, 128, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 224, 224, 254, 254, 30, 31, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 128, 128, 128, 128, 128, 128, 128, 255, 255, 255, 255, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 7, 7, 127, 127, 120, 120, 248, 128, 255, 255, 255, 255, 0, 0, 31, 31, 255, 255, 240, 240, 128, 128, 158, 158, 158, 158, 158, 254, 254, 254, 252, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -51,18 +93,40 @@ void primerFrame(void);
 
 
 
+
+
+typedef struct
+{
+ uint8_t positionX, positionY;
+
+} Objeto;
+
+
+
+
+
+
+
+
 void main() {
 
- int posX;
- int posY;
+
+ Objeto player = {62, 32};
+
+
  int state;
  int modeGame;
- posX = 62;
- posY = 32;
+
  state = 0;
  modeGame = 0;
 
+
  ADCON1=0x0F;
+
+
+
+
+
 
  Glcd_Init();
  Glcd_Fill(0x00);
@@ -128,23 +192,26 @@ void main() {
 
  case 2:
 
-
- Glcd_Dot(posX, posY, 2);
+ Glcd_Dot(player.positionX, player.positionY, 2);
  Delay_ms(10);
 
+
+
+ Glcd_Dot(player.positionX, player.positionY, 2);
+ Delay_ms(10);
 
  if (PORTA.B0 == 1)
  {
  Glcd_Fill(0x00);
  Delay_ms(5);
- posX = posX + 1;
+ player.positionX = player.positionX + 1;
  }
 
  if (PORTA.B1 == 1)
  {
  Glcd_Fill(0x00);
  Delay_ms(5);
- posX = posX - 1;
+ player.positionX = player.positionX - 1;
  }
 
 
@@ -152,15 +219,16 @@ void main() {
  {
  Glcd_Fill(0x00);
  Delay_ms(5);
- posY = posY + 1;
+ player.positionY = player.positionY + 1;
  }
 
  if (PORTA.B3 == 1)
  {
  Glcd_Fill(0x00);
  Delay_ms(5);
- posY = posY - 1;
+ player.positionY = player.positionY - 1;
  }
+
  break;
 
  default:
@@ -174,7 +242,7 @@ void main() {
 
 void primerFrame(void){
  Glcd_Image(pantallaDeInicio);
- Delay_ms(2000);
+ Delay_ms(4000);
  Glcd_Fill(0x00);
 
 }

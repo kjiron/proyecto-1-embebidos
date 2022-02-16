@@ -3,6 +3,11 @@
 //OUTPUT LATCH -> LAT
 //Important to configure the clock in the right way: https://forum.mikroe.com/viewtopic.php?t=10646
 
+#include <stdint.h>
+
+
+//typedef unsigned char uint8_t;
+
 
 //arte maded in: https://www.piskelapp.com/
 // ------------------------------------------------------
@@ -61,19 +66,41 @@ void primerFrame(void);
 
 
 
+
+
+typedef struct
+{
+  uint8_t positionX, positionY;
+
+} Objeto;
+
+
+
+
+
+
+
+
 void main() {
   //position of the pixel
-  int posX;
-  int posY;
+  
+  Objeto player = {62, 32};
+  
+
   int state;
   int modeGame;
-  posX = 62;
-  posY = 32;
+
   state = 0;
   modeGame = 0;
+
   //ADCON1 -> allow us to set the pin as digital I/O in the ports A and B
   ADCON1=0x0F;
+  
+  
+  
 
+
+  
   Glcd_Init();                                   // Initialize GLCD
   Glcd_Fill(0x00);                               // Clear GLCD
 
@@ -137,24 +164,27 @@ void main() {
 
 
     case 2:
-    
-      //juegoPixel(posX, posY);
-      Glcd_Dot(posX, posY, 2);
+
+      Glcd_Dot(player.positionX, player.positionY, 2);
       Delay_ms(10);
 
+  
+      
+      Glcd_Dot(player.positionX, player.positionY, 2);
+      Delay_ms(10);
 
       if (PORTA.B0 == 1)
       {
         Glcd_Fill(0x00);
         Delay_ms(5);
-        posX = posX + 1;
+        player.positionX = player.positionX + 1;
       }
 
       if (PORTA.B1 == 1)
       {
         Glcd_Fill(0x00);
         Delay_ms(5);
-        posX = posX - 1;
+        player.positionX = player.positionX - 1;
       }
 
   
@@ -162,15 +192,16 @@ void main() {
       {
         Glcd_Fill(0x00);
         Delay_ms(5);
-        posY = posY + 1;
+        player.positionY = player.positionY + 1;
       }
 
       if (PORTA.B3 == 1)
       {
         Glcd_Fill(0x00);
         Delay_ms(5);
-        posY = posY - 1;
+        player.positionY = player.positionY - 1;
       }
+      
       break;
     
     default:
@@ -184,7 +215,7 @@ void main() {
 
 void primerFrame(void){
   Glcd_Image(pantallaDeInicio);
-  Delay_ms(2000);
+  Delay_ms(4000);
   Glcd_Fill(0x00);
   
 }

@@ -1,11 +1,11 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP18F4550 -DL -O11111114 -fo8 -N"C:\Users\Usuario\Desktop\Isemestre2022\tallerEmbebidos\proyecto-1-embebidos\dbg\drawImagePixel.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\Usuario\Desktop\Isemestre2022\tallerEmbebidos\proyecto-1-embebidos\dbg\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" "drawImagePixel.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_GlcdFonts.mcl" "__Lib_Glcd.mcl"	 
 hint: 0	1139	Available RAM: 2027 [bytes], Available ROM: 32768 [bytes]	 
-diagnostics: 0	122	Compilation Started	drawImagePixel.c
-diagnostics: 190	123	Compiled Successfully	drawImagePixel.c
+diagnostics: 0	122	Compilation Started	stdint.h
+diagnostics: 221	123	Compiled Successfully	drawImagePixel.c
 diagnostics: 0	127	All files Compiled in 94 ms	 
-hint: 0	1144	Used RAM (bytes): 34 (2%)  Free RAM (bytes): 1993 (98%)	Used RAM (bytes): 34 (2%)  Free RAM (bytes): 1993 (98%)
-hint: 0	1144	Used ROM (bytes): 3948 (12%)  Free ROM (bytes): 28820 (88%)	Used ROM (bytes): 3948 (12%)  Free ROM (bytes): 28820 (88%)
+hint: 0	1144	Used RAM (bytes): 32 (2%)  Free RAM (bytes): 1995 (98%)	Used RAM (bytes): 32 (2%)  Free RAM (bytes): 1995 (98%)
+hint: 0	1144	Used ROM (bytes): 3984 (12%)  Free ROM (bytes): 28784 (88%)	Used ROM (bytes): 3984 (12%)  Free ROM (bytes): 28784 (88%)
 diagnostics: 0	125	Project Linked Successfully	drawImagePixel.mcppi
 diagnostics: 0	128	Linked in 31 ms	 
 diagnostics: 0	129	Project 'drawImagePixel.mcppi' completed: 156 ms	 
-diagnostics: 0	103	Finished successfully: 13 feb. 2022, 18:40:36	drawImagePixel.mcppi
+diagnostics: 0	103	Finished successfully: 15 feb. 2022, 13:28:30	drawImagePixel.mcppi

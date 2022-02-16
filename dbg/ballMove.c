@@ -25,6 +25,16 @@ sbit GLCD_RST_Direction at TRISB5_bit;
 // End Glcd module connections
 
 
+struct Objeto
+{
+  int posX, posY;
+  int velocX, velocY;
+
+} Ball;
+
+
+
+
 void main() {
   //position of the pixel
   int posX;
@@ -33,7 +43,10 @@ void main() {
   posX = 62;
   posY = 32;
   state = 0;
-
+  Ball.posX = 50;
+  Ball.posY = 40;
+  Ball.velocX = 1;
+  Ball.velocY = 1;
   //ADCON1 -> allow us to set the pin as digital I/O in the ports A and B
   ADCON1=0x0F;
 
@@ -44,37 +57,10 @@ void main() {
 
   while (1)
   {
-    Glcd_Dot(posX, posY, 2);
-    Delay_ms(10);
 
-    if (PORTA.B0 == 1)
-    {
-      Glcd_Fill(0x00);
-      Delay_ms(5);
-      posX = posX + 1;
-    }
-
-    if (PORTA.B1 == 1)
-    {
-      Glcd_Fill(0x00);
-      Delay_ms(5);
-      posX = posX - 1;
-    }
-
-
-    if (PORTA.B2 == 1)
-    {
-      Glcd_Fill(0x00);
-      Delay_ms(5);
-      posY = posY + 1;
-    }
-
-    if (PORTA.B3 == 1)
-    {
-      Glcd_Fill(0x00);
-      Delay_ms(5);
-      posY = posY - 1;
-    }
+    Glcd_Circle(Ball.posX, Ball.posY, 3, 1);
+    
+  
 
 
   }
