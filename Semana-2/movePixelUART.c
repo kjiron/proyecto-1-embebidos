@@ -4,6 +4,9 @@
 //Important to configure the clock in the right way: https://forum.mikroe.com/viewtopic.php?t=10646
 
 #include <stdint.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 
 //typedef unsigned char uint8_t;
@@ -74,56 +77,140 @@ typedef struct
 } Objeto;
 
 
+typedef struct
+{
+  uint8_t posX, posY;
+  int8_t dx, dy;
+} Generic;
+
+
+
+typedef struct 
+{
+  bool up, down, right, left, enter;
+} Keys;
+
+uint8_t kkk = 0;
+
+Objeto movePlayer(Objeto);
+uint8_t menuDeJuego(uint8_t);
+Keys readKeys(void);
+void checkWallCollision(Generic *);
+
+
+
+
+void UARTx_Write2(void *arg_data, size_t n)
+{
+    uint8_t c;
+    uint8_t *p = (uint8_t *)arg_data;
+    size_t i;
+    for (i = 0; i < n; i++) {
+        //while (UART1_Tx_Idle() != 1) {}
+        c = p[i];
+        UART1_Write(c);
+    }
+}
+
+void UARTx_Read2(void *arg_data, size_t n)
+{
+    char *p = (char *)arg_data;
+    size_t i;
+    for (i = 0; i < n; )
+    {
+     if (UART_Data_Ready() == 1) {
+         p[i] = UART1_Read(); 
+         i++;
+      }
+      
+          
+    }
+}
+
+
+size_t strlen(char *str) {
+  size_t i;
+  for (i = 0; str[i] != 0; i++)
+  {
+    
+  }
+  return i;
+}
+
+
+Generic moveBall(Generic ball)
+{ 
+  ball.posX = ball.posX + ball.dx;
+  ball.posY = ball.posY + ball.dy;
+  return ball;
+}
+
+
+bool check_collision(Generic _ball, Objeto player)
+{
+    return (_ball.posX) < (player.positionX) + (player.positionX + 2) &&
+       (_ball.posX) + (_ball.posX + 3) > (player.positionX) &&
+       (_ball.posY) < (player.positionY + player.positionY + 14) &&
+       (_ball.posY + 14 + _ball.posY) > (player.positionY);
+}
+
+// randint(10) -> 0 .. 10
+uint8_t randint(uint8_t n)
+{
+    return (uint8_t)(rand() % (n+1));
+}
+
+char culo[128];
 
 void main() {
   //position of the pixel
 
-  Objeto playerOne = {62,32};
-  Objeto playerTwo = {30,15};
+  Objeto playerOne = {122,18};
+  Objeto playerTwo = {5,18};
+  Generic ball = {64, 32, -1, 1}; //iba a asignar el radio pero el siempre es constante e incluso el color r = 3 y c = 1
+  Keys key;
   //este estado es necesario para ejemplificar el modo UART
   uint8_t state = 3;
   uint8_t modeGame = 0;
+  uint8_t randNum = 0;
   char buffer;
   
-  
+  //aqui una funcion para configurar puertos
   UART1_Init(9600);
   Delay_ms(100);
   ADCON1=0x0F;
-
-
   
   Glcd_Init();                                   // Initialize GLCD
   Glcd_Fill(0x00);                               // Clear GLCD
-
-
-
-
 
   while (1)
   {
     switch (state)
     {
     case 0:
+      //portada
       primerFrame();
-      state = 3;
+      state = 1;
       break;
     
     case 1:
       Glcd_Image(seleccionDeJuego);
       Glcd_Circle(25, 34, 4, 1);
+      
       while (1)
       {
-        if ((PORTA.B4 == 1) && (modeGame == 0))
+        key = readKeys();
+
+        if ((key.enter) && (modeGame == 0))
         {
           Delay_ms(20);
           state = 2;
           break;
         }
 
-        if ((modeGame == 0) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
+        if ((modeGame == 0) && ((key.down) || (key.up)))
         {
           Glcd_Fill(0x00);
-          Delay_ms(20);
           Glcd_Image(seleccionDeJuego);
           Glcd_Circle(25, 48, 4, 1);
           Delay_ms(1000);
@@ -131,178 +218,105 @@ void main() {
         }
 
 
-        if ((PORTA.B4 == 1) && (modeGame == 1))
+        if ((key.enter == 1) && (modeGame == 1))
         {
           Delay_ms(20);
           state = 3;
           break;
         }
 
-        if ((modeGame == 1) && ((PORTA.B3 == 1) || (PORTA.B2 == 1)))
+        if ((modeGame == 1) && ((key.down) || (key.up)))
         {
           Glcd_Fill(0x00);
-          Delay_ms(20);
           Glcd_Image(seleccionDeJuego);
           Glcd_Circle(25, 35, 4, 1);
           Delay_ms(1000);
           modeGame = 0;
-        }
-        
-               
+        }       
       }
       Delay_ms(1000);
-      Glcd_Fill(0x00);
+      Glcd_Fill(0x00); 
       break;
         
-
-
     case 2:
-
+      //single player
       Glcd_Dot(playerOne.positionX, playerOne.positionY, 2);
-      Delay_ms(10);
-
-  
-      
-      Glcd_Dot(playerOne.positionX, playerOne.positionY, 2);
-      Delay_ms(10);
-
-      if (PORTA.B0 == 1)
-      {
-        Glcd_Fill(0x00);
-        Delay_ms(5);
-        playerOne.positionX = playerOne.positionX + 1;
-      }
-
-      if (PORTA.B1 == 1)
-      {
-        Glcd_Fill(0x00);
-        Delay_ms(5);
-        playerOne.positionX = playerOne.positionX - 1;
-      }
-
-  
-      if (PORTA.B2 == 1)
-      {
-        Glcd_Fill(0x00);
-        Delay_ms(5);
-        playerOne.positionY = playerOne.positionY + 1;
-      }
-
-      if (PORTA.B3 == 1)
-      {
-        Glcd_Fill(0x00);
-        Delay_ms(5);
-        playerOne.positionY = playerOne.positionY - 1;
-      }
-      
+      Delay_ms(10);      
+      playerOne = movePlayer(playerOne);
       break;
     
     case 3:
-
-        //esta seccion hace referencia al transmisor osea TX
-        if(UART_Tx_Idle() == 1){
-            if (PORTA.B0 == 1){
-                //HEX 0xAA es para cualquier posicion en X
-                UART1_Write(0xAA);
-                Glcd_Fill(0x00);
-                Delay_ms(50);
-                playerOne.positionX = playerOne.positionX + 1;
-                UART1_Write(playerOne.positionX);
-                Delay_ms(50);
-            }
-
-            if (PORTA.B1 == 1){
-                UART1_Write(0xAA);
-                Glcd_Fill(0x00);
-                Delay_ms(50);
-                playerOne.positionX = playerOne.positionX - 1;
-                UART1_Write(playerOne.positionX);
-                Delay_ms(50);
-            }
+      //multiplayer
+      //esta seccion hace referencia al transmisor osea TX
+      //setear el valor de la paleta cuando se sale de la pantalla
 
 
+      /*
+      if(UART_Tx_Idle() == 1){
+        ball = moveBall(ball);
+        checkWallCollision(&ball);
+        playerOne = movePlayer(playerOne);
 
-            if (PORTA.B2 == 1){
-                //HEX 0xAA es para cualquier posicion en Y
-                UART1_Write(0xBB);
-                Glcd_Fill(0x00);
-                Delay_ms(50);
-                playerOne.positionY = playerOne.positionY + 1;
-                UART1_Write(playerOne.positionY);
-                Delay_ms(50);
-            }
-
-            if (PORTA.B3 == 1){
-                UART1_Write(0xBB);
-                Glcd_Fill(0x00);
-                Delay_ms(50);
-                playerOne.positionY = playerOne.positionY - 1;
-                UART1_Write(playerOne.positionY);
-                Delay_ms(50);
-            }
-
-        }
-        
-
-        if(UART_Data_Ready()){
-            //PORTA.B0 = 0;         //esto es una buena idea para depurar y entender el flujo
-            Glcd_Fill(0x00);
-            buffer = UART_Read();
-            if(buffer == 0xAA){
-                //buffer = 0;
-                Delay_ms(50);
-                if(UART_Data_Ready()){
-                    //PORTA.B1 = 1;
-                    buffer = UART_Read();
-                    // se transforma el char en int para poder graficar
-                    playerTwo.positionX = (int)buffer;
-                }
-            }
-
-            else if(buffer == 0xBB){
-                Delay_ms(50);
-                if(UART_Data_Ready()){
-                    //buffer = 0;
-                    //PORTA.B2 = 1;
-                    buffer = UART_Read();
-                    playerTwo.positionY = (int)buffer;
-                }
-            }
-
-            else{
-                //PORTA.B1 = 0;
-                //PORTA.B2 = 0;
-                buffer = 0;
-            }
-        }
-
-        
-        else
+        //para player1
+        if (((ball.posX + 3 ) > (playerOne.positionX)) & (ball.posY > playerOne.positionY) & (ball.posY < (playerOne.positionY + 14)))
         {
-            //PORTA.B0 = 1;
+          ball.dx = -1;
+          //0 a 1
+          randNum = randint(1);
+          if (randNum == 0)
+          {
+            ball.dy = -1;
+          }
+          if (randNum == 1)
+          {
+            ball.dy = 1;
+          }    
         }
-        
-        
 
-        Glcd_Rectangle(playerOne.positionX, playerOne.positionY, playerOne.positionX + 2, playerOne.positionY + 3, 1);
-        Glcd_Rectangle(playerTwo.positionX, playerTwo.positionY, playerTwo.positionX - 2, playerTwo.positionY + 3, 1);
-        //Glcd_Circle_Fill(playerOne.positionX, playerOne.positionY, 4, 1);
-        //Glcd_Circle_Fill(playerTwo.positionX, playerTwo.positionY, 4, 1);
-        Delay_ms(10);
-                  
-        
+        UART1_Write(0xFF);    
+        UARTx_Write2(&playerOne, sizeof(Objeto)); //esta funcion llama a UARTx_Write() según el tamaño de la data
+        UART1_Write(0xDD);    
+        UARTx_Write2(&ball, sizeof(Generic)); 
 
-    
-        break;
+      }
+      */
+
+      if(UART_Data_Ready() == 1){
+        Glcd_Fill(0x00);
+
+        //buffer = UART_Read();
+
+       UARTx_Read2(&buffer, 1);
+
+        if (buffer == 0xEE || 0) {
+          //Delay_ms(30);
+          UARTx_Read2(&playerTwo, sizeof(Objeto));
+          //UARTx_Read2(culo, 10);
+          //Delay_ms(1000);
+         
+        }
+      }
+  
+       //UARTx_Write2(culo, 15); 
+      Glcd_Fill(0x00);
+      Delay_ms(50);
+      Glcd_Rectangle(playerOne.positionX, playerOne.positionY, playerOne.positionX + 2, playerOne.positionY + 14, 1);
+      Glcd_Rectangle(playerTwo.positionX, playerTwo.positionY, playerTwo.positionX - 2, playerTwo.positionY + 14, 1);
+      Glcd_Circle(ball.posX, ball.posY, 3, 1);
+
+      //Glcd_Circle_Fill(playerOne.positionX, playerOne.positionY, 4, 1);
+      //Glcd_Circle_Fill(playerTwo.positionX, playerTwo.positionY, 4, 1);
+      Delay_ms(10);
+      break;
 
 
     default:
       break;
+
+  
     }
 
   }
-
-
 }
 
 void primerFrame(void){
@@ -310,4 +324,74 @@ void primerFrame(void){
   Delay_ms(4000);
   Glcd_Fill(0x00);
   
+}
+
+Objeto movePlayer(Objeto player)
+{
+  Keys key;
+  key = readKeys();
+
+  if (key.right){
+    //Glcd_Fill(0x00);
+    //Delay_ms(5);
+    player.positionX = player.positionX + 1;
+  }
+
+  if (key.left){
+    //Glcd_Fill(0x00);
+    //Delay_ms(5);
+    player.positionX = player.positionX - 1;
+  }
+
+
+  if (key.down){
+    //Glcd_Fill(0x00);
+    //Delay_ms(5);
+    player.positionY = player.positionY + 1;
+  }
+
+  if (key.up){
+    //Glcd_Fill(0x00);
+    //Delay_ms(5);
+    player.positionY = player.positionY - 1;
+  }
+
+  return player;
+}
+
+
+
+
+Keys readKeys(void)
+{
+
+  Keys tmp;
+  tmp.right = PORTA.B0 == 1;
+  tmp.left  = PORTA.B1 == 1;
+  tmp.up    = PORTA.B2 == 1;
+  tmp.down  = PORTA.B3 == 1;
+  tmp.enter = PORTA.B4 == 1;
+  return tmp;
+}
+
+
+void checkWallCollision(Generic *ball_tmp)
+{
+  
+  if (ball_tmp->posY > 60){
+      ball_tmp->dy = -1;
+  }
+
+  if (ball_tmp->posX < 5){
+      ball_tmp->dx = 1;
+  }
+
+  if (ball_tmp->posY < 5){
+      ball_tmp->dy = 1;
+  }
+
+  if (ball_tmp->posX > 124){
+      ball_tmp->dx = -1;
+  }
+
 }
