@@ -18,9 +18,6 @@ async def movimientoVertical(writer: asyncio.StreamWriter):
         print(f"jugador 1 : ({5},{positionY})")
         #player2 0xEE marca
         b = struct.pack("<BBB", 0xEE, 5, positionY)
-        #b = struct.pack("<BB", 5, positionY)
-        #print("culo",b.hex())
-        #await writeslow(writer, b)
         writer.write(b)
         await asyncio.sleep(0.1)
 
