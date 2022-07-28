@@ -31,8 +31,8 @@ By : ![KJiron](https://github.com/kjiron) & ![RBrenes](https://github.com/Andrub
 
 #### Semana 5
 
-El proyecto logró obtener un juego basado en ![pong](https://www.youtube.com/watch?v=fiShX2pTz9A) 
-en la placa de desarrollo de ![MikroE easypic](https://www.mikroe.com/easypic-dspic30), el resultado
+El proyecto logró obtener un juego basado en [pong](https://www.youtube.com/watch?v=fiShX2pTz9A) 
+en la placa de desarrollo de [MikroE easypic](https://www.mikroe.com/easypic-dspic30), el resultado
 final se encuentra en semana 5 que es donde los archivos necesarios se encuentran ubicados. El proyecto
 utiliza el protocolo UART para lograr el modo de 2 jugadores permitiendo la comunicación entre ambos
 MCU:
